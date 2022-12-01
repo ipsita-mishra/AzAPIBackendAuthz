@@ -21,6 +21,9 @@ func main() {
 	r.GET("/", func(c *gin.Context) {
 		c.String(http.StatusOK, "Hello World!")
 	})
+	r.GET("/signup", func(c *gin.Context) {
+		c.String(http.StatusOK, "Sign In Successful")
+	})
 	r.GET("/signin", func(c *gin.Context) {
 		c.String(http.StatusOK, "Sign In Successful")
 	})
