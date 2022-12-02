@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/base64"
+	"encoding/json"
 	"log"
 	"net/http"
 	"os"
@@ -33,8 +34,15 @@ func main() {
 	r.GET("/api/privi", func(c *gin.Context) {
 		val, ok := c.Request.Header["X-Ms-Client-Principal"]
 		decodedUserInfo, _ := base64.StdEncoding.DecodeString((strings.Join(val, "")))
+		var id identity
+		json.Unmarshal([]byte(decodedUserInfo), &id)
 		if ok {
-			c.String(http.StatusOK, "Your RBAC role is : %s .Here are details you are allowed to view : %s", decodedUserInfo)
+			for _, role := range id.UserRoles {
+				if role == "authenticated" {
+
+					c.String(http.StatusOK, "You can see this because you are -> %s .Your RBAC role(s) are : %s . ", role, id.UserRoles)
+				}
+			}
 		} else {
 			c.String(http.StatusOK, "Please login to view the information.")
 		}
@@ -42,4 +50,11 @@ func main() {
 
 	log.Printf("Listening on port %s", port)
 	r.Run(":" + port)
+}
+
+type identity struct {
+	IdentityProvider string   `json:"identityProvider"`
+	UserID           string   `json:"userId"`
+	UserDetails      string   `json:"userDetails"`
+	UserRoles        []string `json:"userRoles"`
 }
