@@ -18,20 +18,8 @@ func main() {
 
 	r := gin.New()
 
-	r.GET("/api/signup", func(c *gin.Context) {
-		c.String(http.StatusOK, "Sign In Successful")
-	})
-	r.GET("/api/signin", func(c *gin.Context) {
-		c.String(http.StatusOK, "Sign In Successful")
-	})
-	r.GET("/api/signout", func(c *gin.Context) {
-		c.String(http.StatusOK, "Sign Out Successful")
-	})
-	r.GET("/api/insensitive", func(c *gin.Context) {
-		c.String(http.StatusOK, "API data response post auth - Insensitive")
-	})
-	r.GET("/api/sensitive", func(c *gin.Context) {
-		c.String(http.StatusOK, "API data response post auth - Sensitive")
+	r.GET("/api/userinfo", func(c *gin.Context) {
+		c.String(http.StatusOK, "Sign In Successful. Here are your details : %s", c.Request.Header["X-Ms-Client-Principal"])
 	})
 
 	log.Printf("Listening on port %s", port)
