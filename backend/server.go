@@ -15,7 +15,7 @@ func main() {
 		port = "6666"
 		log.Printf("Defaulting to port %s", port)
 	}
-
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
 
 	r.GET("/api/userinfo", func(c *gin.Context) {
