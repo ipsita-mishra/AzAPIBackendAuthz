@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
-
+	<!-- loginUrl := "/.auth/login/github"
+	logoutUrl := "/.auth/logout"
+	authInfo := "/.auth/me" -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,7 +15,9 @@
         <h1>Azure Static Web App - Vanilla JS</h1>
         <nav>
             <ul>
-                <li><a class="link" href="/api/userinfo">Sign In</a></li>
+                <li><a class="link" href="/.auth/login/github">Sign In</a></li>
+                <li><a class="link" href="/api/userinfo">My Profile</a></li>
+                <li><a class="link" href="/.auth/logout">Sign Out</a></li>
             </ul>
         </nav>
     </header>
