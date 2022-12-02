@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-	<!-- authInfo := "/.auth/me" -->
+<!-- authInfo := "/.auth/me" -->
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,8 +16,8 @@
             <ul>
                 <li><a class="link" href="/.auth/login/github">Sign In</a></li>
                 <li><a class="link" onclick="userinfo()">My Profile</a></li>
-                <li><a class="link" href="/api/upgradeRBAC">Bump Privileges</a></li>
-                <li><a class="link" href="/api/privi">See Prvileged Info</a></li>
+                <li><a class="link" onclick="changerole()">Change RBAC Role</a></li>
+                <li><a class="link" onclick="privi()">See Prvileged Info</a></li>
                 <li><a class="link" href="/.auth/logout">Sign Out</a></li>
             </ul>
         </nav>
@@ -26,17 +27,42 @@
     </main>
     <script>
         function userinfo() {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("content_box").innerHTML =
-              this.responseText;
-            }
-          };
-          xhttp.open("GET", "/api/userinfo", true);
-          xhttp.send();
+            document.getElementById("content_box").innerHTML = "";
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("content_box").innerHTML =
+                        this.responseText;
+                }
+            };
+            xhttp.open("GET", "/api/userinfo", true);
+            xhttp.send();
         }
-        </script>
+        function changerole() {
+            document.getElementById("content_box").innerHTML = "";
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("content_box").innerHTML =
+                        this.responseText;
+                }
+            };
+            xhttp.open("GET", "/api/changerole", true);
+            xhttp.send();
+        }
+        function privi() {
+            document.getElementById("content_box").innerHTML = "";
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("content_box").innerHTML =
+                        this.responseText;
+                }
+            };
+            xhttp.open("GET", "/api/privi", true);
+            xhttp.send();
+        }
+    </script>
 </body>
 
 </html>
