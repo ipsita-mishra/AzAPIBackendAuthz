@@ -18,16 +18,13 @@ func main() {
 
 	r := gin.New()
 
-	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hello World!")
-	})
-	r.GET("/signup", func(c *gin.Context) {
+	r.GET("/api/signup", func(c *gin.Context) {
 		c.String(http.StatusOK, "Sign In Successful")
 	})
-	r.GET("/signin", func(c *gin.Context) {
+	r.GET("/api/signin", func(c *gin.Context) {
 		c.String(http.StatusOK, "Sign In Successful")
 	})
-	r.GET("/signout", func(c *gin.Context) {
+	r.GET("/api/signout", func(c *gin.Context) {
 		c.String(http.StatusOK, "Sign Out Successful")
 	})
 	r.GET("/api/insensitive", func(c *gin.Context) {
