@@ -1,0 +1,20 @@
+{
+    "routes": [
+      {
+        "route": "/api/*",
+        "methods": ["GET"],
+        "allowedRoles": ["authenticated"],
+        "headers": {
+            "Cache-Control": "no-store"
+        }
+      },
+      {
+        "route": "/login",
+        "rewrite": "/.auth/login/github?post_login_redirect_uri=.referrer"
+      },
+      {
+        "route": "/logout",
+        "redirect": "/.auth/logout"
+      }
+    ]
+  }
