@@ -1,20 +1,35 @@
 {
     "routes": [
-      {
-        "route": "/api/*",
-        "methods": ["GET"],
-        "allowedRoles": ["authenticated"],
-        "headers": {
-            "Cache-Control": "no-store"
+        {
+            "route": "/api/*",
+            "methods": [
+                "GET"
+            ],
+            "allowedRoles": [
+                "authenticated"
+            ],
+            "headers": {
+                "Cache-Control": "no-store"
+            }
+        },
+        {
+            "route": "/login",
+            "rewrite": "/.auth/login/github?post_login_redirect_uri=https://delightful-bush-0174f0e03.2.azurestaticapps.net"
+        },
+        {
+            "route": "/logout",
+            "redirect": "/.auth/logout"
         }
-      },
-      {
-        "route": "/login",
-        "rewrite": "/.auth/login/github?post_login_redirect_uri=.referrer"
-      },
-      {
-        "route": "/logout",
-        "redirect": "/.auth/logout"
-      }
-    ]
-  }
+    ],
+    "auth": {
+        "identityProviders": {
+            "azureActiveDirectory": {
+                "registration": {
+                    "openIdIssuer": "https://login.microsoftonline.com/<TENANT_ID>/v2.0",
+                    "clientIdSettingName": "AZURE_CLIENT_ID",
+                    "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+                }
+            }
+        }
+    }
+}
