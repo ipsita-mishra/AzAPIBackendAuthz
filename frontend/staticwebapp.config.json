@@ -22,7 +22,16 @@
             "redirect": "/.auth/logout?post_logout_redirect_uri=https://delightful-bush-0174f0e03.2.azurestaticapps.net",
             "statusCode": 302
         }
-    ], "auth": {
-
+    ],
+    "auth": {
+        "identityProviders": {
+            "azureActiveDirectory": {
+                "registration": {
+                    "openIdIssuer": "https://login.microsoftonline.com/<TENANT_ID>/v2.0",
+                    "clientIdSettingName": "AZURE_CLIENT_ID",
+                    "clientSecretSettingName": "AZURE_CLIENT_SECRET"
+                }
+            }
+        }
     }
 }
