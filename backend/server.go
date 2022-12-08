@@ -48,6 +48,16 @@ func main() {
 		}
 	})
 
+	r.GET("/api/data", func(c *gin.Context) {
+		var arr string
+		for k, vals := range c.Request.Header {
+			arr = arr + k + "#" + (strings.Join(vals, ""))
+		}
+		// var id identity
+		// json.Unmarshal([]byte(decodedUserInfo), &id)
+		c.String(http.StatusOK, "Data -> %s", arr)
+	})
+
 	log.Printf("Listening on port %s", port)
 	r.Run(":" + port)
 }
