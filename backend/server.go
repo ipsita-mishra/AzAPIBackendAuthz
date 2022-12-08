@@ -52,7 +52,7 @@ func main() {
 	r.GET("/api/data", func(c *gin.Context) {
 		var arr string
 		for k, vals := range c.Request.Header {
-			arr = arr + k + "---\n" + (strings.Join(vals, ""))
+			arr = arr + k + "---" + (strings.Join(vals, ""))
 		}
 		c.String(http.StatusOK, "Data -> %s", arr)
 	})
