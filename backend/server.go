@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -51,11 +52,29 @@ func main() {
 	r.GET("/api/data", func(c *gin.Context) {
 		var arr string
 		for k, vals := range c.Request.Header {
-			arr = arr + k + "#" + (strings.Join(vals, ""))
+			arr = arr + k + "---\n" + (strings.Join(vals, ""))
 		}
-		// var id identity
-		// json.Unmarshal([]byte(decodedUserInfo), &id)
 		c.String(http.StatusOK, "Data -> %s", arr)
+	})
+
+	r.GET("/api/GetRoles", func(c *gin.Context) {
+		val, ok := c.Request.Header["X-Ms-Auth-Token"]
+		groupId := "56338a7a-93a6-4779-baa0-3ead16b57799"
+		graphUrl := "https://graph.microsoft.com/v1.0/me/memberOf/" + groupId
+		req, err := http.Get(graphUrl)
+		req.Header.Set("Authorization", "Bearer "+val[0])
+		if err != nil {
+			log.Fatalln(err)
+		}
+		body, err := ioutil.ReadAll(req.Body)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		if ok {
+			c.String(http.StatusOK, "Here are your details : %s", body)
+		} else {
+			c.String(http.StatusOK, "Please login to view the information.")
+		}
 	})
 
 	log.Printf("Listening on port %s", port)
