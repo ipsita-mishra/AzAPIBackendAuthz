@@ -6,4 +6,4 @@ Azure API Backend Authn/z POC showcasing end to end authentication and authoriza
 - Azure Container App
 - Vanilla JS
 - Golang Gin Framework
-- Docker
+- Docker ([link to backend dockerfile](https://hub.docker.com/r/ipsitamishra16893/minimalback/tags))
